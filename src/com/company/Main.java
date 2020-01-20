@@ -5,23 +5,32 @@ public class Main {
     public static void main(String[] args) {
 
         Counter<Apple> appleCounter = new Counter<>();
-        Box<Object> box = new Box<>();
+        Counter<Box> boxCounter = new Counter<>();
+        Counter<Cart> cartCounter = new Counter<>();
 
         appleCounter.add( new Apple() );
         appleCounter.add( new Apple() );
         appleCounter.add( new Apple() );
 
-        box.addThingsToBox( new Apple() );
-        box.addThingsToBox( "String" );
-        box.addThingsToBox( 34 );
+        Box<Apple> box1 = new Box<>();
+        Box<Apple> box2 = new Box<>();
 
-        System.out.println( appleCounter.getCount() );
-        System.out.println( box.getCount() );
+        boxCounter.add( new Box() );
+
+        box1.addThingsToBox( new Apple() );
+        box1.addThingsToBox( new Apple() );
+        box1.addThingsToBox( new Apple() );
+
+        box2.addThingsToBox( new Apple() );
+        box2.addThingsToBox( new Apple() );
+
+        Cart cart1 = new Cart();
+
+        cartCounter.add( cart1 );
+        cart1.addThingsToCart( box2 );
+
+        System.out.println( cartCounter.getCount() );
 
     }
 
-    private static String  changeString(String str) {
-        str += "fff";
-        return str;
-    }
 }

@@ -12,7 +12,11 @@ public class Counter<T extends Countable> {
     }
 
     public int getCount() {
-        return contents.size();
+        int totalCount = 0;
+        for (T thing : contents) {
+            totalCount += thing.getCount();
+        }
+        return totalCount;
     }
 
 }

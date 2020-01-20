@@ -3,7 +3,7 @@ package com.company;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Box<T> implements Countable {
+public class Box<T extends Countable> implements Countable {
 
     private List<T> listOfThingsInABox = new ArrayList<>();
 
@@ -13,6 +13,10 @@ public class Box<T> implements Countable {
 
     @Override
     public int getCount() {
-        return listOfThingsInABox.size();
+        int totalCount = 0;
+        for (T things : listOfThingsInABox) {
+            totalCount += things.getCount();
+        }
+        return totalCount;
     }
 }
