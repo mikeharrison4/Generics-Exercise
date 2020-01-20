@@ -2,6 +2,7 @@ package com.company;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class Cart implements Countable {
 
@@ -12,12 +13,8 @@ public class Cart implements Countable {
     }
 
     @Override
-    public int getCount() {
-        int totalCount = 0;
-        for (Box box : boxes) {
-            totalCount += box.getCount();
-        }
-        return totalCount;
+    public int getCount(Predicate predicate) {
+        return boxes.stream().map(o -> o.getCount(predicate)).mapToInt(Integer::intValue).sum();
     }
 
 }

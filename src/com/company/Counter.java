@@ -1,22 +1,25 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class Counter<T extends Countable> {
 
-    private List<T> contents = new ArrayList<>();
+    private Predicate predicate;
+    private List<T> contents = new ArrayList<T>();
+
+    public Counter(Predicate predicate) {
+        this.predicate = predicate;
+    }
 
     public void add(T thing) {
         contents.add(thing);
     }
 
     public int getCount() {
-        int totalCount = 0;
-        for (T thing : contents) {
-            totalCount += thing.getCount();
-        }
-        return totalCount;
+        return contents.stream().map(o -> o.getCount(predicate)).mapToInt(Integer::intValue).sum();
     }
 
 }
